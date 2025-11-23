@@ -24,3 +24,36 @@ body {
 	color: var(--foreground);
 	font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Print styles for the word grid */
+@media print {
+	@page {
+		margin: 0.4in;
+		size: letter portrait;
+	}
+
+	body {
+		background: white !important;
+		color: black !important;
+	}
+
+	/* Ensure grid stays together and doesn't break awkwardly */
+	.grid {
+		page-break-inside: auto;
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+	/* Prevent individual words from breaking across pages */
+	.grid > div {
+		page-break-inside: avoid;
+		break-inside: avoid;
+		width: 100% !important;
+	}
+
+	/* Ensure 5 columns fit on the page */
+	.grid.grid-cols-5 {
+		display: grid !important;
+		grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+	}
+}
